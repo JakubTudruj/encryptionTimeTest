@@ -11,61 +11,93 @@ import CommonCrypto
 
 class ViewController: UIViewController {
 
+    let semaphore = DispatchSemaphore(value: 1)
+    lazy var keyGenerator = KeyGenerator(semaphore: semaphore)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
    
     @IBAction func startTestButtonTapped(_ sender: Any) {
-        let semaphore = DispatchSemaphore(value: 1)
-        
         test(name: "RSA 1024") {
-            KeyGenerator().rsa(keyLength: .rsa1024)
+            self.keyGenerator.rsa(keyLength: .rsa1024)
         }
         
         test(name: "RSA 2048") {
-            KeyGenerator().rsa(keyLength: .rsa2048)
+            self.keyGenerator.rsa(keyLength: .rsa2048)
         }
         
         test(name: "RSA 4096") {
-            KeyGenerator().rsa(keyLength: .rsa4096)
+            self.keyGenerator.rsa(keyLength: .rsa4096)
         }
         
         test(name: "RSA 8192") {
-            KeyGenerator().rsa(keyLength: .rsa8192)
+            self.keyGenerator.rsa(keyLength: .rsa8192)
         }
         
         test(name: "RSA 15360") {
-            KeyGenerator().rsa(keyLength: .rsa15360)
+            self.keyGenerator.rsa(keyLength: .rsa15360)
         }
         
         test(name: "ECC 160") {
-            KeyGenerator().ecc(keyLength: .ecc160)
+            self.keyGenerator.ecc(keyLength: .ecc160)
         }
         
         test(name: "ECC 224") {
-            KeyGenerator().ecc(keyLength: .ecc224)
+            self.keyGenerator.ecc(keyLength: .ecc224)
         }
         
         test(name: "ECC 256") {
-            KeyGenerator().ecc(keyLength: .ecc256)
+            self.keyGenerator.ecc(keyLength: .ecc256)
         }
         
         test(name: "ECC 384") {
-            KeyGenerator().ecc(keyLength: .ecc384)
+            self.keyGenerator.ecc(keyLength: .ecc384)
         }
         
         test(name: "ECC 512") {
-            KeyGenerator().ecc(keyLength: .ecc512)
+            self.keyGenerator.ecc(keyLength: .ecc512)
+        }
+        
+        test(name: "AES 128") {
+            self.keyGenerator.aes(keyLength: .aes128)
+        }
+        
+        test(name: "AES 192") {
+            self.keyGenerator.aes(keyLength: .aes192)
+        }
+        
+        test(name: "AES 256") {
+            self.keyGenerator.aes(keyLength: .aes256)
         }
     }
     
     
+    func test(name: String, code: ()->()) {
+        semaphore.wait()
+        let startTime = Date()
+        print("\n\n\nStarted test: ", name, " at time: ", startTime)
+        code()
+        let stopTime = Date()
+        print("Stopped ad time: ", stopTime)
+        let executionTime = stopTime.timeIntervalSince(startTime)
+        print("Execution time: ", executionTime)
+        print("seconds: ", executionTime.seconds)
+        print("miliseconds: ", executionTime.miliseconds)
+        print("##########################")
+    }
     
 }
 
 
 class KeyGenerator {
+    
+    let semaphore: DispatchSemaphore
+    
+    init(semaphore: DispatchSemaphore) {
+        self.semaphore = semaphore
+    }
     
     enum RSA: Int {
         case rsa1024 = 1024
@@ -114,6 +146,7 @@ class KeyGenerator {
         } else {
             print("Error: ", status)
         }
+        semaphore.signal()
     }
     
     private func key(parameters: [CFString : Any]) {
@@ -122,21 +155,9 @@ class KeyGenerator {
         if let e = error {
             print("Error: ", e)
         }
+        semaphore.signal()
     }
     
-}
-
-func test(name: String, code: ()->()) {
-    let startTime = Date()
-    print("\n\n\nStarted test: ", name, " at time: ", startTime)
-    code()
-    let stopTime = Date()
-    print("Stopped ad time: ", stopTime)
-    let executionTime = stopTime.timeIntervalSince(startTime)
-    print("Execution time: ", executionTime)
-    print("seconds: ", executionTime.seconds)
-    print("miliseconds: ", executionTime.miliseconds)
-    print("##########################")
 }
 
 extension TimeInterval {
