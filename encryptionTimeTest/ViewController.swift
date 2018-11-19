@@ -11,71 +11,97 @@ import CommonCrypto
 
 class ViewController: UIViewController {
 
-    let semaphore = DispatchSemaphore(value: 1)
-    lazy var keyGenerator = KeyGenerator(semaphore: semaphore)
+    lazy var keyGenerator = KeyGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        keyGenerator.resetKeychain()
     }
 
    
     @IBAction func startTestButtonTapped(_ sender: Any) {
+        let semaphore = DispatchSemaphore(value: 1)
+        
         test(name: "RSA 1024") {
             self.keyGenerator.rsa(keyLength: .rsa1024)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "RSA 2048") {
             self.keyGenerator.rsa(keyLength: .rsa2048)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "RSA 4096") {
             self.keyGenerator.rsa(keyLength: .rsa4096)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "RSA 8192") {
             self.keyGenerator.rsa(keyLength: .rsa8192)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "RSA 15360") {
             self.keyGenerator.rsa(keyLength: .rsa15360)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "ECC 160") {
             self.keyGenerator.ecc(keyLength: .ecc160)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "ECC 224") {
             self.keyGenerator.ecc(keyLength: .ecc224)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "ECC 256") {
             self.keyGenerator.ecc(keyLength: .ecc256)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "ECC 384") {
             self.keyGenerator.ecc(keyLength: .ecc384)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "ECC 512") {
             self.keyGenerator.ecc(keyLength: .ecc512)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "AES 128") {
             self.keyGenerator.aes(keyLength: .aes128)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "AES 192") {
             self.keyGenerator.aes(keyLength: .aes192)
+            semaphore.signal()
         }
         
+        semaphore.wait()
         test(name: "AES 256") {
             self.keyGenerator.aes(keyLength: .aes256)
+            semaphore.signal()
         }
     }
     
     
     func test(name: String, code: ()->()) {
-        semaphore.wait()
         let startTime = Date()
         print("\n\n\nStarted test: ", name, " at time: ", startTime)
         code()
@@ -92,13 +118,7 @@ class ViewController: UIViewController {
 
 
 class KeyGenerator {
-    
-    let semaphore: DispatchSemaphore
-    
-    init(semaphore: DispatchSemaphore) {
-        self.semaphore = semaphore
-    }
-    
+   
     enum RSA: Int {
         case rsa1024 = 1024
         case rsa2048 = 2048
@@ -146,7 +166,6 @@ class KeyGenerator {
         } else {
             print("Error: ", status)
         }
-        semaphore.signal()
     }
     
     private func key(parameters: [CFString : Any]) {
@@ -154,10 +173,27 @@ class KeyGenerator {
         SecKeyCreateRandomKey(parameters as CFDictionary, &error)
         if let e = error {
             print("Error: ", e)
+            print()
         }
-        semaphore.signal()
     }
     
+    func resetKeychain() {
+        deleteAllKeysForSecClass(kSecClassGenericPassword)
+        deleteAllKeysForSecClass(kSecClassInternetPassword)
+        deleteAllKeysForSecClass(kSecClassCertificate)
+        deleteAllKeysForSecClass(kSecClassKey)
+        deleteAllKeysForSecClass(kSecClassIdentity)
+    }
+    
+    func deleteAllKeysForSecClass(_ secClass: CFTypeRef) {
+        let dict: [String : Any] = [kSecClass as String : secClass,]
+        deleteKey(for: dict)
+    }
+    
+    func deleteKey(for attributes: [String: Any]) {
+        let result = SecItemDelete(attributes as CFDictionary)
+        assert(result == noErr || result == errSecItemNotFound, "Error deleting keychain data (\(result))")
+    }
 }
 
 extension TimeInterval {
