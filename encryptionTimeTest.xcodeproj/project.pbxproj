@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C08D69E21A31E33007BC4C0 /* EncryptionResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C08D69D21A31E33007BC4C0 /* EncryptionResultTableViewCell.swift */; };
 		8CF3DD8B20E57944005D9F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */; };
 		8CF3DD8D20E57944005D9F08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8C20E57944005D9F08 /* ViewController.swift */; };
 		8CF3DD9020E57944005D9F08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8E20E57944005D9F08 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C08D69D21A31E33007BC4C0 /* EncryptionResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionResultTableViewCell.swift; sourceTree = "<group>"; };
 		8CF3DD8720E57944005D9F08 /* encryptionTimeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = encryptionTimeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CF3DD8C20E57944005D9F08 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				8CF3DD9120E57949005D9F08 /* Assets.xcassets */,
 				8CF3DD9320E57949005D9F08 /* LaunchScreen.storyboard */,
 				8CF3DD9620E57949005D9F08 /* Info.plist */,
+				8C08D69D21A31E33007BC4C0 /* EncryptionResultTableViewCell.swift */,
 			);
 			path = encryptionTimeTest;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			files = (
 				8CF3DD8D20E57944005D9F08 /* ViewController.swift in Sources */,
 				8CF3DD8B20E57944005D9F08 /* AppDelegate.swift in Sources */,
+				8C08D69E21A31E33007BC4C0 /* EncryptionResultTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
