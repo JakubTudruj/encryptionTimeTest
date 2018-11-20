@@ -11,109 +11,92 @@ import CommonCrypto
 
 class ViewController: UIViewController {
 
-    lazy var keyGenerator = KeyGenerator()
+    @IBOutlet weak var textView: UITextView!
+    let keyGenerator = KeyGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         keyGenerator.resetKeychain()
+        textView.text = nil
     }
 
    
     @IBAction func startTestButtonTapped(_ sender: Any) {
-        let semaphore = DispatchSemaphore(value: 1)
-        
+        textView.text = nil
         test(name: "RSA 1024") {
-            self.keyGenerator.rsa(keyLength: .rsa1024)
-            semaphore.signal()
+            return self.keyGenerator.rsa(keyLength: .rsa1024)
         }
         
-        semaphore.wait()
         test(name: "RSA 2048") {
-            self.keyGenerator.rsa(keyLength: .rsa2048)
-            semaphore.signal()
+            return self.keyGenerator.rsa(keyLength: .rsa2048)
         }
         
-        semaphore.wait()
         test(name: "RSA 4096") {
-            self.keyGenerator.rsa(keyLength: .rsa4096)
-            semaphore.signal()
+            return self.keyGenerator.rsa(keyLength: .rsa4096)
         }
         
-        semaphore.wait()
         test(name: "RSA 8192") {
-            self.keyGenerator.rsa(keyLength: .rsa8192)
-            semaphore.signal()
+            return self.keyGenerator.rsa(keyLength: .rsa8192)
         }
         
-        semaphore.wait()
         test(name: "RSA 15360") {
-            self.keyGenerator.rsa(keyLength: .rsa15360)
-            semaphore.signal()
+            return self.keyGenerator.rsa(keyLength: .rsa15360)
         }
         
-        semaphore.wait()
         test(name: "ECC 160") {
-            self.keyGenerator.ecc(keyLength: .ecc160)
-            semaphore.signal()
+            return self.keyGenerator.ecc(keyLength: .ecc160)
         }
         
-        semaphore.wait()
         test(name: "ECC 224") {
-            self.keyGenerator.ecc(keyLength: .ecc224)
-            semaphore.signal()
+            return self.keyGenerator.ecc(keyLength: .ecc224)
         }
         
-        semaphore.wait()
         test(name: "ECC 256") {
-            self.keyGenerator.ecc(keyLength: .ecc256)
-            semaphore.signal()
+            return self.keyGenerator.ecc(keyLength: .ecc256)
         }
         
-        semaphore.wait()
         test(name: "ECC 384") {
-            self.keyGenerator.ecc(keyLength: .ecc384)
-            semaphore.signal()
+            return self.keyGenerator.ecc(keyLength: .ecc384)
         }
         
-        semaphore.wait()
         test(name: "ECC 512") {
-            self.keyGenerator.ecc(keyLength: .ecc512)
-            semaphore.signal()
+            return self.keyGenerator.ecc(keyLength: .ecc512)
         }
         
-        semaphore.wait()
         test(name: "AES 128") {
-            self.keyGenerator.aes(keyLength: .aes128)
-            semaphore.signal()
+            return self.keyGenerator.aes(keyLength: .aes128)
         }
         
-        semaphore.wait()
         test(name: "AES 192") {
-            self.keyGenerator.aes(keyLength: .aes192)
-            semaphore.signal()
+            return self.keyGenerator.aes(keyLength: .aes192)
         }
         
-        semaphore.wait()
         test(name: "AES 256") {
-            self.keyGenerator.aes(keyLength: .aes256)
-            semaphore.signal()
+            return self.keyGenerator.aes(keyLength: .aes256)
         }
     }
     
     
-    func test(name: String, code: ()->()) {
+    func test(name: String, code: ()->(String?)) {
+        
         let startTime = Date()
-        print("\n\n\nStarted test: ", name, " at time: ", startTime)
-        code()
+        let startText = "\nStarted test: \(name) at time: \(startTime)"
+        print(startText)
+        textView.text += startText
+        if let error = code() {
+            textView.text += error
+        }
         let stopTime = Date()
-        print("Stopped ad time: ", stopTime)
+        var text = "\nStopped ad time: \(stopTime)\n"
         let executionTime = stopTime.timeIntervalSince(startTime)
-        print("Execution time: ", executionTime)
-        print("seconds: ", executionTime.seconds)
-        print("miliseconds: ", executionTime.miliseconds)
-        print("##########################")
+        text += "Execution time: \(executionTime)\n"
+        text += "seconds: \(executionTime.seconds)\n"
+        text += "miliseconds: \(executionTime.miliseconds)\n"
+        text += "##########################\n\n\n"
+        print(text)
+        textView.text += text
     }
-    
+
 }
 
 
@@ -141,39 +124,43 @@ class KeyGenerator {
         case aes256 = 256
     }
     
-    func rsa(keyLength: RSA) {
+    func rsa(keyLength: RSA) -> String? {
         let parameters: [CFString : Any] = [
             kSecAttrKeyType : kSecAttrKeyTypeRSA,
             kSecAttrKeySizeInBits : keyLength.rawValue
         ]
-        key(parameters: parameters)
+        return key(parameters: parameters)
     }
     
-    func ecc(keyLength: ECC) {
+    func ecc(keyLength: ECC) -> String? {
         let parameters: [CFString : Any] = [
             kSecAttrKeyType : kSecAttrKeyTypeECSECPrimeRandom,
             kSecAttrKeySizeInBits : keyLength.rawValue
         ]
-        key(parameters: parameters)
+        return key(parameters: parameters)
     }
     
-    func aes(keyLength: AES) {
+    func aes(keyLength: AES) -> String? {
         var bytes = [Int8](repeating: 0, count: keyLength.rawValue)
         let status = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
         if status == errSecSuccess {
             print("AES \(keyLength.rawValue):")
             print(bytes)
+            return nil
         } else {
             print("Error: ", status)
+            return "Error: \(status)"
         }
     }
     
-    private func key(parameters: [CFString : Any]) {
+    private func key(parameters: [CFString : Any]) -> String? {
         var error: Unmanaged<CFError>?
         SecKeyCreateRandomKey(parameters as CFDictionary, &error)
         if let e = error {
             print("Error: ", e)
-            print()
+            return "Error: \(e)"
+        } else {
+            return nil
         }
     }
     
