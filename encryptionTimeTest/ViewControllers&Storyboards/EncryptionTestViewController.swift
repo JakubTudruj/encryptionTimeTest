@@ -59,6 +59,7 @@ extension EncryptionTestViewController: UITableViewDataSource {
 }
 
 extension EncryptionTestViewController: EncryptionTestViewModelDelegate {
+    
     func viewModelDidEndAllTest() {
         activityIndicator.stopAnimating()
         startTestButton.isEnabled = true

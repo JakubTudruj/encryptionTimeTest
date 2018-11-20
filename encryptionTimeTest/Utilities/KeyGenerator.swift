@@ -8,6 +8,17 @@
 
 import Foundation
 
+enum AESError: LocalizedError {
+    case secRandomCopyBytes(OSStatus)
+    
+    var errorDescription: String? {
+        switch self {
+        case .secRandomCopyBytes(let code):
+            return "AES generating error. OSStatus: \(code)"
+        }
+    }
+}
+
 class KeyGenerator {
     
     enum RSA: Int {
@@ -48,17 +59,6 @@ class KeyGenerator {
         try key(parameters: parameters)
     }
     
-    enum AESError: LocalizedError {
-        case secRandomCopyBytes(OSStatus)
-        
-        var errorDescription: String? {
-            switch self {
-            case .secRandomCopyBytes(let code):
-                return "AES generating error. OSStatus: \(code)"
-            }
-        }
-    }
-    
     func aes(keyLength: AES) throws {
         var bytes = [Int8](repeating: 0, count: keyLength.rawValue)
         let status = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
@@ -86,12 +86,12 @@ class KeyGenerator {
         deleteAllKeysForSecClass(kSecClassIdentity)
     }
     
-    func deleteAllKeysForSecClass(_ secClass: CFTypeRef) {
+    private func deleteAllKeysForSecClass(_ secClass: CFTypeRef) {
         let dict: [String : Any] = [kSecClass as String : secClass,]
         deleteKey(for: dict)
     }
     
-    func deleteKey(for attributes: [String: Any]) {
+    private func deleteKey(for attributes: [String: Any]) {
         let result = SecItemDelete(attributes as CFDictionary)
         assert(result == noErr || result == errSecItemNotFound, "Error deleting keychain data (\(result))")
     }

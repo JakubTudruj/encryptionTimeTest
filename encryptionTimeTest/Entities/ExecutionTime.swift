@@ -9,6 +9,7 @@
 import Foundation
 
 struct ExecutionTime {
+    
     let timeInterval: TimeInterval
     
     var seconds: Int64 {
@@ -18,4 +19,5 @@ struct ExecutionTime {
     var miliseconds: Int64 {
         return timeInterval.miliseconds
     }
+    
 }

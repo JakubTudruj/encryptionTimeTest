@@ -16,12 +16,13 @@ protocol EncryptionTestViewModelDelegate: class {
 }
 
 class EncryptionTestViewModel {
+    
     private(set) var results = [ResultEntity]()
     
     weak var delegate: EncryptionTestViewModelDelegate?
     
     private let keyGenerator = KeyGenerator()
-    let semaphore = DispatchSemaphore(value: 1)
+    private let semaphore = DispatchSemaphore(value: 1)
     
     func runAllTests() {
         keyGenerator.resetKeychain()
@@ -36,13 +37,13 @@ class EncryptionTestViewModel {
             try self?.keyGenerator.rsa(keyLength: .rsa2048)
         }
         
-//        test(name: "RSA 4096") { [weak self] in
-//            try self?.keyGenerator.rsa(keyLength: .rsa4096)
-//        }
-//
-//        test(name: "RSA 8192") { [weak self] in
-//            try self?.keyGenerator.rsa(keyLength: .rsa8192)
-//        }
+        test(name: "RSA 4096") { [weak self] in
+            try self?.keyGenerator.rsa(keyLength: .rsa4096)
+        }
+
+        test(name: "RSA 8192") { [weak self] in
+            try self?.keyGenerator.rsa(keyLength: .rsa8192)
+        }
         
         test(name: "RSA 15360") { [weak self] in
             try self?.keyGenerator.rsa(keyLength: .rsa15360)
@@ -85,13 +86,12 @@ class EncryptionTestViewModel {
         
     }
     
-    func test(name: String, code: @escaping () throws -> ()) {
+    private func test(name: String, code: @escaping () throws -> ()) {
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
             self.semaphore.wait()
             let result = self.execute(test: code, named: name)
             DispatchQueue.main.async { [weak self] in
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 self?.results.append(result)
                 self?.delegate?.viewModelDidEndTest(with: result)
             }
@@ -110,4 +110,5 @@ class EncryptionTestViewModel {
         let stopTime = Date()
         return ResultEntity(name: name, startTime: startTime, stopTime: stopTime, error: error)
     }
+    
 }

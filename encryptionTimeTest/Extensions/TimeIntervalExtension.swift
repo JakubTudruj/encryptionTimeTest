@@ -9,6 +9,7 @@
 import Foundation
 
 extension TimeInterval {
+    
     var miliseconds: Int64 {
         return Int64((self * 1000.0).rounded())
     }
@@ -16,4 +17,5 @@ extension TimeInterval {
     var seconds: Int64 {
         return Int64(self)
     }
+    
 }
