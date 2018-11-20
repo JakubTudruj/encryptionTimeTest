@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		8C8EF56921A484870068820D /* ResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56821A484870068820D /* ResultEntity.swift */; };
+		8C8EF56D21A48B130068820D /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */; };
+		8C8EF57021A48B350068820D /* KeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56F21A48B350068820D /* KeyGenerator.swift */; };
+		8C8EF57421A48BC40068820D /* EncryptionTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF57321A48BC40068820D /* EncryptionTestViewModel.swift */; };
 		8CF3DD8B20E57944005D9F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */; };
-		8CF3DD8D20E57944005D9F08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8C20E57944005D9F08 /* ViewController.swift */; };
+		8CF3DD8D20E57944005D9F08 /* EncryptionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8C20E57944005D9F08 /* EncryptionTestViewController.swift */; };
 		8CF3DD9020E57944005D9F08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8E20E57944005D9F08 /* Main.storyboard */; };
 		8CF3DD9220E57949005D9F08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3DD9120E57949005D9F08 /* Assets.xcassets */; };
 		8CF3DD9520E57949005D9F08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3DD9320E57949005D9F08 /* LaunchScreen.storyboard */; };
@@ -28,9 +31,12 @@
 
 /* Begin PBXFileReference section */
 		8C8EF56821A484870068820D /* ResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultEntity.swift; sourceTree = "<group>"; };
+		8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
+		8C8EF56F21A48B350068820D /* KeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGenerator.swift; sourceTree = "<group>"; };
+		8C8EF57321A48BC40068820D /* EncryptionTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionTestViewModel.swift; sourceTree = "<group>"; };
 		8CF3DD8720E57944005D9F08 /* encryptionTimeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = encryptionTimeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8CF3DD8C20E57944005D9F08 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8CF3DD8C20E57944005D9F08 /* EncryptionTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionTestViewController.swift; sourceTree = "<group>"; };
 		8CF3DD8F20E57944005D9F08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8CF3DD9120E57949005D9F08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CF3DD9420E57949005D9F08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,6 +64,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C8EF56A21A48AEF0068820D /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				8C8EF56821A484870068820D /* ResultEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		8C8EF56B21A48AF50068820D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8C8EF56E21A48B290068820D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8C8EF56F21A48B350068820D /* KeyGenerator.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		8C8EF57121A48B6A0068820D /* ViewControllers&Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				8CF3DD8E20E57944005D9F08 /* Main.storyboard */,
+				8CF3DD8C20E57944005D9F08 /* EncryptionTestViewController.swift */,
+			);
+			path = "ViewControllers&Storyboards";
+			sourceTree = "<group>";
+		};
+		8C8EF57221A48B760068820D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8C8EF57321A48BC40068820D /* EncryptionTestViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		8CF3DD7E20E57944005D9F08 = {
 			isa = PBXGroup;
 			children = (
@@ -80,12 +127,14 @@
 			isa = PBXGroup;
 			children = (
 				8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */,
-				8CF3DD8C20E57944005D9F08 /* ViewController.swift */,
-				8CF3DD8E20E57944005D9F08 /* Main.storyboard */,
 				8CF3DD9120E57949005D9F08 /* Assets.xcassets */,
-				8CF3DD9320E57949005D9F08 /* LaunchScreen.storyboard */,
+				8C8EF56A21A48AEF0068820D /* Entities */,
+				8C8EF56B21A48AF50068820D /* Extensions */,
 				8CF3DD9620E57949005D9F08 /* Info.plist */,
-				8C8EF56821A484870068820D /* ResultEntity.swift */,
+				8CF3DD9320E57949005D9F08 /* LaunchScreen.storyboard */,
+				8C8EF56E21A48B290068820D /* Utilities */,
+				8C8EF57121A48B6A0068820D /* ViewControllers&Storyboards */,
+				8C8EF57221A48B760068820D /* ViewModels */,
 			);
 			path = encryptionTimeTest;
 			sourceTree = "<group>";
@@ -200,9 +249,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CF3DD8D20E57944005D9F08 /* ViewController.swift in Sources */,
+				8CF3DD8D20E57944005D9F08 /* EncryptionTestViewController.swift in Sources */,
+				8C8EF57421A48BC40068820D /* EncryptionTestViewModel.swift in Sources */,
 				8C8EF56921A484870068820D /* ResultEntity.swift in Sources */,
+				8C8EF57021A48B350068820D /* KeyGenerator.swift in Sources */,
 				8CF3DD8B20E57944005D9F08 /* AppDelegate.swift in Sources */,
+				8C8EF56D21A48B130068820D /* TimeIntervalExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
