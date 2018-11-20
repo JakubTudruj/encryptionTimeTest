@@ -71,10 +71,8 @@ extension EncryptionTestViewController: EncryptionTestViewModelDelegate {
     }
     
     func viewModelDidEndTest(with result: ResultEntity) {
-//        tableView.beginUpdates()
         let indexPath = IndexPath(row: viewModel.results.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: .right)
-//        tableView.endUpdates()
         print(result)
     }
 
