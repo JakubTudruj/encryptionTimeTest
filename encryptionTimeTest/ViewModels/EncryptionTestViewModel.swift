@@ -11,6 +11,8 @@ import Foundation
 
 protocol EncryptionTestViewModelDelegate: class {
     func viewModelDidEndTest(with result: ResultEntity)
+    func viewModelDidEndClearingResults()
+    func viewModelDidEndAllTest()
 }
 
 class EncryptionTestViewModel {
@@ -19,10 +21,14 @@ class EncryptionTestViewModel {
     weak var delegate: EncryptionTestViewModelDelegate?
     
     private let keyGenerator = KeyGenerator()
+    let semaphore = DispatchSemaphore(value: 1)
     
     func runAllTests() {
         keyGenerator.resetKeychain()
+        results = [ResultEntity]()
+        delegate?.viewModelDidEndClearingResults()
         
+        semaphore.signal()
         test(name: "RSA 1024") {
             try self.keyGenerator.rsa(keyLength: .rsa1024)
         }
@@ -35,9 +41,9 @@ class EncryptionTestViewModel {
             try self.keyGenerator.rsa(keyLength: .rsa4096)
         }
         
-        //        test(name: "RSA 8192") {
-        //            try self.keyGenerator.rsa(keyLength: .rsa8192)
-        //        }
+        test(name: "RSA 8192") {
+            try self.keyGenerator.rsa(keyLength: .rsa8192)
+        }
         
         test(name: "RSA 15360") {
             try self.keyGenerator.rsa(keyLength: .rsa15360)
@@ -73,25 +79,31 @@ class EncryptionTestViewModel {
         
         test(name: "AES 256") {
             try self.keyGenerator.aes(keyLength: .aes256)
+            DispatchQueue.main.async { [weak self] in
+                self?.delegate?.viewModelDidEndAllTest()
+            }
         }
+        
     }
     
     func test(name: String, code: @escaping () throws -> ()) {
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self = self else { return }
+            self.semaphore.wait()
             let result = self.execute(test: code, named: name)
+            self.results.append(result)
             DispatchQueue.main.async { [weak self] in
                 self?.delegate?.viewModelDidEndTest(with: result)
             }
+            self.semaphore.signal()
         }
     }
     
     private func execute(test: () throws -> (), named name: String) -> ResultEntity {
         let startTime = Date()
-        let error: Error?
+        var error: Error? = nil
         do {
             try test()
-            error = nil
         } catch(let e) {
             error = e
         }

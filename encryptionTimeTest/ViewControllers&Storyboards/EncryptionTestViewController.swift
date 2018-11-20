@@ -10,22 +10,66 @@ import UIKit
 
 class EncryptionTestViewController: UIViewController {
 
-    let viewModel = EncryptionTestViewModel()
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var startTestButton: UIButton!
+    
+    private let viewModel = EncryptionTestViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+        setupActivityIndicator()
         viewModel.delegate = self
     }
 
-    @IBAction func startTestButtonTapped(_ sender: Any) {
+    private func setupTableView() {
+        tableView.estimatedRowHeight = 185.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.dataSource = self
+    }
+    
+    private func setupActivityIndicator() {
+        activityIndicator.hidesWhenStopped = true
+    }
+    
+    @IBAction private func startTestButtonTapped(_ sender: Any) {
+        activityIndicator.startAnimating()
+        startTestButton.isEnabled = false
         viewModel.runAllTests()
     }
     
 }
 
+extension EncryptionTestViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.results.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EncryptionTestTableViewCell", for: indexPath) as? EncryptionTestTableViewCell ?? EncryptionTestTableViewCell()
+        cell.entity = viewModel.results[indexPath.row]
+        return cell
+    }
+    
+}
+
 extension EncryptionTestViewController: EncryptionTestViewModelDelegate {
+    func viewModelDidEndAllTest() {
+        tableView.reloadData()
+        activityIndicator.stopAnimating()
+        startTestButton.isEnabled = true
+        tableView.layoutSubviews()
+    }
+    
+    func viewModelDidEndClearingResults() {
+        tableView.reloadData()
+        tableView.layoutSubviews()
+    }
     
     func viewModelDidEndTest(with result: ResultEntity) {
+        tableView.reloadData()
         var text = "\nStarted test: \(result.name) at time: \(result.startTime)"
         text += "\nStopped ad time: \(result.stopTime)\n"
         if let error = result.error {

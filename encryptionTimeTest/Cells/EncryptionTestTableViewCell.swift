@@ -25,10 +25,11 @@ class EncryptionTestTableViewCell: UITableViewCell {
         setupNameLabel(with: entity)
         setupTimeLabel(with: entity)
         setupErrorLabel(with: entity)
+        layoutSubviews()
     }
     
     private func setupNameLabel(with entity: ResultEntity) {
-        let resultSymbol = entity.error != nil ? "✅" : "‼️"
+        let resultSymbol = entity.error == nil ? "✅" : "‼️"
         testNameLabel.text = "\(resultSymbol) \(entity.name)"
     }
     
@@ -37,13 +38,20 @@ class EncryptionTestTableViewCell: UITableViewCell {
         formatter.dateFormat = "hh:mm:ss"
         let startTime = formatter.string(from: entity.startTime)
         let stopTime = formatter.string(from: entity.stopTime)
-        var executionTime = ""
-        if entity.executionTime.timeInterval > 0.01 {
-            executionTime = "\(entity.executionTime.seconds)s"
-            executionTime += " \(entity.executionTime.miliseconds)ms"
+        let executionTime: String
+        if entity.executionTime.timeInterval > 0.0001 {
+            executionTime = "\(entity.executionTime.miliseconds)ms"
         } else {
             executionTime = "\(entity.executionTime.timeInterval)s"
         }
+//        var executionTime = ""
+//        if entity.executionTime.timeInterval > 0.01 {
+////            executionTime = "\(entity.executionTime.seconds)s"
+////            var miliseconds = "\(entity.executionTime.miliseconds)ms"
+//            executionTime += "\(entity.executionTime.miliseconds)ms"
+//        } else {
+//            executionTime = "\(entity.executionTime.timeInterval)s"
+//        }
         timeLabel.text = "\(startTime) - \(stopTime) (\(executionTime))"
     }
     
