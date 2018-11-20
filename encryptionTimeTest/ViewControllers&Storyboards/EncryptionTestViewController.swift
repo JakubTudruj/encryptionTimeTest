@@ -27,6 +27,7 @@ class EncryptionTestViewController: UIViewController {
         tableView.estimatedRowHeight = 185.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
     }
     
     private func setupActivityIndicator() {
