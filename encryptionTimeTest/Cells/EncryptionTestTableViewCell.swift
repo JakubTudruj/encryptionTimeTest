@@ -38,11 +38,11 @@ class EncryptionTestTableViewCell: UITableViewCell {
         formatter.dateFormat = "hh:mm:ss"
         let startTime = formatter.string(from: entity.startTime)
         let stopTime = formatter.string(from: entity.stopTime)
-        let executionTime: String
+        let miliseconds: String
         if entity.executionTime.timeInterval > 0.0001 {
-            executionTime = "\(entity.executionTime.miliseconds)ms"
+            miliseconds = "\(entity.executionTime.miliseconds)ms"
         } else {
-            executionTime = "\(entity.executionTime.timeInterval)s"
+            miliseconds = "\(entity.executionTime.timeInterval)s"
         }
 //        var executionTime = ""
 //        if entity.executionTime.timeInterval > 0.01 {
@@ -52,7 +52,8 @@ class EncryptionTestTableViewCell: UITableViewCell {
 //        } else {
 //            executionTime = "\(entity.executionTime.timeInterval)s"
 //        }
-        timeLabel.text = "\(startTime) - \(stopTime) (\(executionTime))"
+        timeLabel.text = "\(startTime) - \(stopTime) (\(miliseconds))"
+        timeLabel.text = "\(entity.executionTime.seconds)s (\(miliseconds)ms)"
     }
     
     private func setupErrorLabel(with entity: ResultEntity) {

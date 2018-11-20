@@ -28,57 +28,56 @@ class EncryptionTestViewModel {
         results = [ResultEntity]()
         delegate?.viewModelDidEndClearingResults()
         
-        semaphore.signal()
-        test(name: "RSA 1024") {
-            try self.keyGenerator.rsa(keyLength: .rsa1024)
+        test(name: "RSA 1024") { [weak self] in
+            try self?.keyGenerator.rsa(keyLength: .rsa1024)
         }
         
-        test(name: "RSA 2048") {
-            try self.keyGenerator.rsa(keyLength: .rsa2048)
+        test(name: "RSA 2048") { [weak self] in
+            try self?.keyGenerator.rsa(keyLength: .rsa2048)
         }
         
-        test(name: "RSA 4096") {
-            try self.keyGenerator.rsa(keyLength: .rsa4096)
+        test(name: "RSA 4096") { [weak self] in
+            try self?.keyGenerator.rsa(keyLength: .rsa4096)
         }
         
-        test(name: "RSA 8192") {
-            try self.keyGenerator.rsa(keyLength: .rsa8192)
+        test(name: "RSA 8192") { [weak self] in
+            try self?.keyGenerator.rsa(keyLength: .rsa8192)
         }
         
-        test(name: "RSA 15360") {
-            try self.keyGenerator.rsa(keyLength: .rsa15360)
+        test(name: "RSA 15360") { [weak self] in
+            try self?.keyGenerator.rsa(keyLength: .rsa15360)
         }
         
-        test(name: "ECC 160") {
-            try self.keyGenerator.ecc(keyLength: .ecc160)
+        test(name: "ECC 160") { [weak self] in
+            try self?.keyGenerator.ecc(keyLength: .ecc160)
         }
         
-        test(name: "ECC 224") {
-            try self.keyGenerator.ecc(keyLength: .ecc224)
+        test(name: "ECC 224") { [weak self] in
+            try self?.keyGenerator.ecc(keyLength: .ecc224)
         }
         
-        test(name: "ECC 256") {
-            try self.keyGenerator.ecc(keyLength: .ecc256)
+        test(name: "ECC 256") { [weak self] in
+            try self?.keyGenerator.ecc(keyLength: .ecc256)
         }
         
-        test(name: "ECC 384") {
-            try self.keyGenerator.ecc(keyLength: .ecc384)
+        test(name: "ECC 384") { [weak self] in
+            try self?.keyGenerator.ecc(keyLength: .ecc384)
         }
         
-        test(name: "ECC 512") {
-            try self.keyGenerator.ecc(keyLength: .ecc512)
+        test(name: "ECC 512") { [weak self] in
+            try self?.keyGenerator.ecc(keyLength: .ecc512)
         }
         
-        test(name: "AES 128") {
-            try self.keyGenerator.aes(keyLength: .aes128)
+        test(name: "AES 128") { [weak self] in
+            try self?.keyGenerator.aes(keyLength: .aes128)
         }
         
-        test(name: "AES 192") {
-            try self.keyGenerator.aes(keyLength: .aes192)
+        test(name: "AES 192") { [weak self] in
+            try self?.keyGenerator.aes(keyLength: .aes192)
         }
         
-        test(name: "AES 256") {
-            try self.keyGenerator.aes(keyLength: .aes256)
+        test(name: "AES 256") { [weak self] in
+            try self?.keyGenerator.aes(keyLength: .aes256)
             DispatchQueue.main.async { [weak self] in
                 self?.delegate?.viewModelDidEndAllTest()
             }
@@ -87,16 +86,16 @@ class EncryptionTestViewModel {
     }
     
     func test(name: String, code: @escaping () throws -> ()) {
-//        DispatchQueue.global(qos: .background).async { [weak self] in
-//            guard let self = self else { return }
-//            self.semaphore.wait()
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            self.semaphore.wait()
             let result = self.execute(test: code, named: name)
             self.results.append(result)
-//            DispatchQueue.main.async { [weak self] in
-                self.delegate?.viewModelDidEndTest(with: result)
-//            }
-//            self.semaphore.signal()
-//        }
+            DispatchQueue.main.async { [weak self] in
+                self?.delegate?.viewModelDidEndTest(with: result)
+            }
+            self.semaphore.signal()
+        }
     }
     
     private func execute(test: () throws -> (), named name: String) -> ResultEntity {
