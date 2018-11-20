@@ -11,6 +11,7 @@
 		8C8EF56D21A48B130068820D /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */; };
 		8C8EF57021A48B350068820D /* KeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56F21A48B350068820D /* KeyGenerator.swift */; };
 		8C8EF57421A48BC40068820D /* EncryptionTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF57321A48BC40068820D /* EncryptionTestViewModel.swift */; };
+		8C8EF57721A4909E0068820D /* EncryptionTestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF57621A4909E0068820D /* EncryptionTestTableViewCell.swift */; };
 		8CF3DD8B20E57944005D9F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */; };
 		8CF3DD8D20E57944005D9F08 /* EncryptionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8C20E57944005D9F08 /* EncryptionTestViewController.swift */; };
 		8CF3DD9020E57944005D9F08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8E20E57944005D9F08 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 		8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		8C8EF56F21A48B350068820D /* KeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGenerator.swift; sourceTree = "<group>"; };
 		8C8EF57321A48BC40068820D /* EncryptionTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionTestViewModel.swift; sourceTree = "<group>"; };
+		8C8EF57621A4909E0068820D /* EncryptionTestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionTestTableViewCell.swift; sourceTree = "<group>"; };
 		8CF3DD8720E57944005D9F08 /* encryptionTimeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = encryptionTimeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CF3DD8C20E57944005D9F08 /* EncryptionTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionTestViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		8C8EF57521A4906F0068820D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8C8EF57621A4909E0068820D /* EncryptionTestTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		8CF3DD7E20E57944005D9F08 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +136,7 @@
 		8CF3DD8920E57944005D9F08 /* encryptionTimeTest */ = {
 			isa = PBXGroup;
 			children = (
+				8C8EF57521A4906F0068820D /* Cells */,
 				8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */,
 				8CF3DD9120E57949005D9F08 /* Assets.xcassets */,
 				8C8EF56A21A48AEF0068820D /* Entities */,
@@ -251,6 +262,7 @@
 			files = (
 				8CF3DD8D20E57944005D9F08 /* EncryptionTestViewController.swift in Sources */,
 				8C8EF57421A48BC40068820D /* EncryptionTestViewModel.swift in Sources */,
+				8C8EF57721A4909E0068820D /* EncryptionTestTableViewCell.swift in Sources */,
 				8C8EF56921A484870068820D /* ResultEntity.swift in Sources */,
 				8C8EF57021A48B350068820D /* KeyGenerator.swift in Sources */,
 				8CF3DD8B20E57944005D9F08 /* AppDelegate.swift in Sources */,

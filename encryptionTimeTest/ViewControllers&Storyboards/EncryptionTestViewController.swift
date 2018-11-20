@@ -7,22 +7,17 @@
 //
 
 import UIKit
-import CommonCrypto
 
 class EncryptionTestViewController: UIViewController {
 
-    @IBOutlet weak var textView: UITextView!
-    
     let viewModel = EncryptionTestViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        textView.text = nil
     }
 
     @IBAction func startTestButtonTapped(_ sender: Any) {
-        textView.text = nil
         viewModel.runAllTests()
     }
     
@@ -44,7 +39,6 @@ extension EncryptionTestViewController: EncryptionTestViewModelDelegate {
         }
         text += "\n##########################\n\n\n"
         print(text)
-        textView.text += text
     }
 
 }

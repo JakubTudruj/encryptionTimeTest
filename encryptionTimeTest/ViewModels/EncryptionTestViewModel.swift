@@ -6,6 +6,7 @@
 //  Copyright © 2018 Jakub Tudruj. All rights reserved.
 //
 
+import CommonCrypto
 import Foundation
 
 protocol EncryptionTestViewModelDelegate: class {
