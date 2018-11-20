@@ -71,23 +71,11 @@ extension EncryptionTestViewController: EncryptionTestViewModelDelegate {
     }
     
     func viewModelDidEndTest(with result: ResultEntity) {
-        tableView.beginUpdates()
+//        tableView.beginUpdates()
         let indexPath = IndexPath(row: viewModel.results.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: .right)
-        tableView.endUpdates()
-        var text = "\nStarted test: \(result.name) at time: \(result.startTime)"
-        text += "\nStopped ad time: \(result.stopTime)\n"
-        if let error = result.error {
-            text += "****"
-            text += "\nTestu failure. Error: \(error.localizedDescription)\n"
-            text += "****"
-        } else {
-            text += "\nExecution time: \(result.executionTime.timeInterval)"
-            text += "\nseconds: \(result.executionTime.seconds)"
-            text += "\nmiliseconds: \(result.executionTime.miliseconds)"
-        }
-        text += "\n##########################\n\n\n"
-        print(text)
+//        tableView.endUpdates()
+        print(result)
     }
 
 }

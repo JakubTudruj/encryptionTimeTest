@@ -20,6 +20,23 @@ struct ResultEntity {
     }
 }
 
+extension ResultEntity: CustomStringConvertible {
+    var description: String {
+        var text = "\nStarted test: \(name) at time: \(startTime)"
+        text += "\nStopped ad time: \(stopTime)\n"
+        if let error = error {
+            text += "****"
+            text += "\nTest failure. Error: \(error.localizedDescription)\n"
+            text += "****"
+        } else {
+            text += "\nExecution time: \(executionTime.timeInterval)"
+            text += "\nseconds: \(executionTime.seconds)"
+            text += "\nmiliseconds: \(executionTime.miliseconds)"
+        }
+        return text
+    }
+}
+
 struct ExecutionTime {
     let timeInterval: TimeInterval
     
