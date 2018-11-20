@@ -36,15 +36,3 @@ extension ResultEntity: CustomStringConvertible {
         return text
     }
 }
-
-struct ExecutionTime {
-    let timeInterval: TimeInterval
-    
-    var seconds: Int64 {
-        return timeInterval.seconds
-    }
-    
-    var miliseconds: Int64 {
-        return timeInterval.miliseconds
-    }
-}
