@@ -22,16 +22,16 @@ struct ResultEntity {
 
 extension ResultEntity: CustomStringConvertible {
     var description: String {
-        var text = "\nStarted test: \(name) at time: \(startTime)"
-        text += "\nStopped ad time: \(stopTime)\n"
+        var text = "\nStart time: \(name) at time: \(startTime)"
+        text += "\nStop time: \(stopTime)\n"
         if let error = error {
             text += "****"
             text += "\nTest failure. Error: \(error.localizedDescription)\n"
             text += "****"
         } else {
             text += "\nExecution time: \(executionTime.timeInterval)"
-            text += "\nseconds: \(executionTime.seconds)"
-            text += "\nmiliseconds: \(executionTime.miliseconds)"
+            text += "\nSeconds: \(executionTime.seconds)"
+            text += "\nMiliseconds: \(executionTime.miliseconds)"
         }
         return text
     }
