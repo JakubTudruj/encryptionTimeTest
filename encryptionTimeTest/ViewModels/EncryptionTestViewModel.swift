@@ -87,16 +87,16 @@ class EncryptionTestViewModel {
     }
     
     func test(name: String, code: @escaping () throws -> ()) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else { return }
-            self.semaphore.wait()
+//        DispatchQueue.global(qos: .background).async { [weak self] in
+//            guard let self = self else { return }
+//            self.semaphore.wait()
             let result = self.execute(test: code, named: name)
             self.results.append(result)
-            DispatchQueue.main.async { [weak self] in
-                self?.delegate?.viewModelDidEndTest(with: result)
-            }
-            self.semaphore.signal()
-        }
+//            DispatchQueue.main.async { [weak self] in
+                self.delegate?.viewModelDidEndTest(with: result)
+//            }
+//            self.semaphore.signal()
+//        }
     }
     
     private func execute(test: () throws -> (), named name: String) -> ResultEntity {
