@@ -24,74 +24,83 @@ class ViewController: UIViewController {
     @IBAction func startTestButtonTapped(_ sender: Any) {
         textView.text = nil
         test(name: "RSA 1024") {
-            return self.keyGenerator.rsa(keyLength: .rsa1024)
+            try self.keyGenerator.rsa(keyLength: .rsa1024)
         }
         
         test(name: "RSA 2048") {
-            return self.keyGenerator.rsa(keyLength: .rsa2048)
+            try self.keyGenerator.rsa(keyLength: .rsa2048)
         }
         
         test(name: "RSA 4096") {
-            return self.keyGenerator.rsa(keyLength: .rsa4096)
+            try self.keyGenerator.rsa(keyLength: .rsa4096)
         }
         
-        test(name: "RSA 8192") {
-            return self.keyGenerator.rsa(keyLength: .rsa8192)
-        }
+//        test(name: "RSA 8192") {
+//            try self.keyGenerator.rsa(keyLength: .rsa8192)
+//        }
         
         test(name: "RSA 15360") {
-            return self.keyGenerator.rsa(keyLength: .rsa15360)
+            try self.keyGenerator.rsa(keyLength: .rsa15360)
         }
         
         test(name: "ECC 160") {
-            return self.keyGenerator.ecc(keyLength: .ecc160)
+            try self.keyGenerator.ecc(keyLength: .ecc160)
         }
         
         test(name: "ECC 224") {
-            return self.keyGenerator.ecc(keyLength: .ecc224)
+            try self.keyGenerator.ecc(keyLength: .ecc224)
         }
         
         test(name: "ECC 256") {
-            return self.keyGenerator.ecc(keyLength: .ecc256)
+            try self.keyGenerator.ecc(keyLength: .ecc256)
         }
         
         test(name: "ECC 384") {
-            return self.keyGenerator.ecc(keyLength: .ecc384)
+            try self.keyGenerator.ecc(keyLength: .ecc384)
         }
         
         test(name: "ECC 512") {
-            return self.keyGenerator.ecc(keyLength: .ecc512)
+            try self.keyGenerator.ecc(keyLength: .ecc512)
         }
         
         test(name: "AES 128") {
-            return self.keyGenerator.aes(keyLength: .aes128)
+            try self.keyGenerator.aes(keyLength: .aes128)
         }
         
         test(name: "AES 192") {
-            return self.keyGenerator.aes(keyLength: .aes192)
+            try self.keyGenerator.aes(keyLength: .aes192)
         }
         
         test(name: "AES 256") {
-            return self.keyGenerator.aes(keyLength: .aes256)
+            try self.keyGenerator.aes(keyLength: .aes256)
         }
     }
     
     
-    func test(name: String, code: ()->(String?)) {
-        
+    func test(name: String, code: () throws -> ()) {
         let startTime = Date()
         let startText = "\nStarted test: \(name) at time: \(startTime)"
         print(startText)
         textView.text += startText
-        if let error = code() {
-            textView.text += error
+        let errorText: String?
+        do {
+            try code()
+            errorText = nil
+        } catch {
+            errorText = "\nError: \(error.localizedDescription)"
         }
         let stopTime = Date()
         var text = "\nStopped ad time: \(stopTime)\n"
         let executionTime = stopTime.timeIntervalSince(startTime)
-        text += "Execution time: \(executionTime)\n"
-        text += "seconds: \(executionTime.seconds)\n"
-        text += "miliseconds: \(executionTime.miliseconds)\n"
+        if let unwrappedErrorText = errorText {
+            text += "\n****"
+            text += unwrappedErrorText
+            text += "\n****\n"
+        } else {
+            text += "Execution time: \(executionTime)\n"
+            text += "seconds: \(executionTime.seconds)\n"
+            text += "miliseconds: \(executionTime.miliseconds)\n"
+        }
         text += "##########################\n\n\n"
         print(text)
         textView.text += text
@@ -124,43 +133,50 @@ class KeyGenerator {
         case aes256 = 256
     }
     
-    func rsa(keyLength: RSA) -> String? {
+    func rsa(keyLength: RSA) throws {
         let parameters: [CFString : Any] = [
             kSecAttrKeyType : kSecAttrKeyTypeRSA,
             kSecAttrKeySizeInBits : keyLength.rawValue
         ]
-        return key(parameters: parameters)
+        try key(parameters: parameters)
     }
     
-    func ecc(keyLength: ECC) -> String? {
+    func ecc(keyLength: ECC) throws {
         let parameters: [CFString : Any] = [
             kSecAttrKeyType : kSecAttrKeyTypeECSECPrimeRandom,
             kSecAttrKeySizeInBits : keyLength.rawValue
         ]
-        return key(parameters: parameters)
+        try key(parameters: parameters)
     }
     
-    func aes(keyLength: AES) -> String? {
+    enum AESError: LocalizedError {
+        case secRandomCopyBytes(OSStatus)
+        
+        var errorDescription: String? {
+            switch self {
+            case .secRandomCopyBytes(let code):
+                return "AES generating error. OSStatus: \(code)"
+            }
+        }
+    }
+    
+    func aes(keyLength: AES) throws {
         var bytes = [Int8](repeating: 0, count: keyLength.rawValue)
         let status = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
         if status == errSecSuccess {
             print("AES \(keyLength.rawValue):")
             print(bytes)
-            return nil
         } else {
-            print("Error: ", status)
-            return "Error: \(status)"
+            throw AESError.secRandomCopyBytes(status)
         }
     }
     
-    private func key(parameters: [CFString : Any]) -> String? {
+    private func key(parameters: [CFString : Any]) throws {
         var error: Unmanaged<CFError>?
         SecKeyCreateRandomKey(parameters as CFDictionary, &error)
         if let e = error {
             print("Error: ", e)
-            return "Error: \(e)"
-        } else {
-            return nil
+            throw e.takeRetainedValue()
         }
     }
     
