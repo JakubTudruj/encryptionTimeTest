@@ -78,31 +78,37 @@ class ViewController: UIViewController {
     
     
     func test(name: String, code: () throws -> ()) {
+        let result = execute(test: code, named: name)
+        handle(result: result)
+    }
+    
+    private func execute(test: () throws -> (), named name: String) -> ResultEntity {
         let startTime = Date()
-        let startText = "\nStarted test: \(name) at time: \(startTime)"
-        print(startText)
-        textView.text += startText
-        let errorText: String?
+        let error: Error?
         do {
-            try code()
-            errorText = nil
-        } catch {
-            errorText = "\nError: \(error.localizedDescription)"
+            try test()
+            error = nil
+        } catch(let e) {
+            error = e
         }
         let stopTime = Date()
-        var text = "\nStopped ad time: \(stopTime)\n"
-        let executionTime = stopTime.timeIntervalSince(startTime)
-        if let unwrappedErrorText = errorText {
-            text += "\n****"
-            text += unwrappedErrorText
-            text += "\n****\n"
-        } else {
-            text += "Execution time: \(executionTime)\n"
-            text += "seconds: \(executionTime.seconds)\n"
-            text += "miliseconds: \(executionTime.miliseconds)\n"
-        }
-        text += "##########################\n\n\n"
+        return ResultEntity(name: name, startTime: startTime, stopTime: stopTime, error: error)
+    }
+    
+    private func handle(result: ResultEntity) {
+        var text = "\nStarted test: \(result.name) at time: \(result.startTime)"
         print(text)
+        text += "\nStopped ad time: \(result.stopTime)\n"
+        if let error = result.error {
+            text += "****"
+            text += "\nTestu failure. Error: \(error.localizedDescription)\n"
+            text += "****"
+        } else {
+            text += "\nExecution time: \(result.executionTime.timeInterval)"
+            text += "\nseconds: \(result.executionTime.seconds)"
+            text += "\nmiliseconds: \(result.executionTime.miliseconds)"
+        }
+        text += "\n##########################\n\n\n"
         textView.text += text
     }
 
@@ -175,7 +181,6 @@ class KeyGenerator {
         var error: Unmanaged<CFError>?
         SecKeyCreateRandomKey(parameters as CFDictionary, &error)
         if let e = error {
-            print("Error: ", e)
             throw e.takeRetainedValue()
         }
     }
