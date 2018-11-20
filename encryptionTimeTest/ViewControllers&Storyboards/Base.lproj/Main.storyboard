@@ -51,6 +51,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="HPh-Oh-C6F"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -62,6 +65,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="errorLabel" destination="7Gc-DP-IrB" id="wa8-Fn-FQT"/>
+                                            <outlet property="stackView" destination="IId-Jm-uqu" id="1wa-4S-HBZ"/>
                                             <outlet property="testNameLabel" destination="8Nu-wK-DgR" id="QtE-2r-zLQ"/>
                                             <outlet property="timeLabel" destination="Cw9-am-2h9" id="GjS-eu-9nk"/>
                                         </connections>

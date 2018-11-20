@@ -36,13 +36,13 @@ class EncryptionTestViewModel {
             try self?.keyGenerator.rsa(keyLength: .rsa2048)
         }
         
-        test(name: "RSA 4096") { [weak self] in
-            try self?.keyGenerator.rsa(keyLength: .rsa4096)
-        }
-        
-        test(name: "RSA 8192") { [weak self] in
-            try self?.keyGenerator.rsa(keyLength: .rsa8192)
-        }
+//        test(name: "RSA 4096") { [weak self] in
+//            try self?.keyGenerator.rsa(keyLength: .rsa4096)
+//        }
+//
+//        test(name: "RSA 8192") { [weak self] in
+//            try self?.keyGenerator.rsa(keyLength: .rsa8192)
+//        }
         
         test(name: "RSA 15360") { [weak self] in
             try self?.keyGenerator.rsa(keyLength: .rsa15360)
@@ -90,8 +90,9 @@ class EncryptionTestViewModel {
             guard let self = self else { return }
             self.semaphore.wait()
             let result = self.execute(test: code, named: name)
-            self.results.append(result)
             DispatchQueue.main.async { [weak self] in
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.results.append(result)
                 self?.delegate?.viewModelDidEndTest(with: result)
             }
             self.semaphore.signal()

@@ -25,7 +25,7 @@ class EncryptionTestViewController: UIViewController {
 
     private func setupTableView() {
         tableView.estimatedRowHeight = 185.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = self
     }
     
@@ -50,14 +50,15 @@ extension EncryptionTestViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EncryptionTestTableViewCell", for: indexPath) as? EncryptionTestTableViewCell ?? EncryptionTestTableViewCell()
         cell.entity = viewModel.results[indexPath.row]
+        cell.setNeedsLayout()
+        cell.updateConstraints()
         return cell
     }
-    
+
 }
 
 extension EncryptionTestViewController: EncryptionTestViewModelDelegate {
     func viewModelDidEndAllTest() {
-        tableView.reloadData()
         activityIndicator.stopAnimating()
         startTestButton.isEnabled = true
         tableView.layoutSubviews()
@@ -69,7 +70,10 @@ extension EncryptionTestViewController: EncryptionTestViewModelDelegate {
     }
     
     func viewModelDidEndTest(with result: ResultEntity) {
-        tableView.reloadData()
+        tableView.beginUpdates()
+        let indexPath = IndexPath(row: viewModel.results.count - 1, section: 0)
+        tableView.insertRows(at: [indexPath], with: .right)
+        tableView.endUpdates()
         var text = "\nStarted test: \(result.name) at time: \(result.startTime)"
         text += "\nStopped ad time: \(result.stopTime)\n"
         if let error = result.error {

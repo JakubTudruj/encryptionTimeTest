@@ -13,6 +13,7 @@ class EncryptionTestTableViewCell: UITableViewCell {
     @IBOutlet private weak var testNameLabel: UILabel!
     @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet private weak var stackView: UIStackView!
     
     var entity: ResultEntity? {
         didSet {
@@ -25,7 +26,6 @@ class EncryptionTestTableViewCell: UITableViewCell {
         setupNameLabel(with: entity)
         setupTimeLabel(with: entity)
         setupErrorLabel(with: entity)
-        layoutSubviews()
     }
     
     private func setupNameLabel(with entity: ResultEntity) {
@@ -34,20 +34,12 @@ class EncryptionTestTableViewCell: UITableViewCell {
     }
     
     private func setupTimeLabel(with entity: ResultEntity) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm:ss"
-//        let startTime = formatter.string(from: entity.startTime)
-//        let stopTime = formatter.string(from: entity.stopTime)
+        guard entity.error == nil else {
+            timeLabel.isHidden = true
+            return
+        }
+        timeLabel.isHidden = false
         let miliseconds = entity.executionTime.miliseconds == 0 ? "< 1ms" : "\(entity.executionTime.miliseconds)ms"
-//        var executionTime = ""
-//        if entity.executionTime.timeInterval > 0.01 {
-////            executionTime = "\(entity.executionTime.seconds)s"
-////            var miliseconds = "\(entity.executionTime.miliseconds)ms"
-//            executionTime += "\(entity.executionTime.miliseconds)ms"
-//        } else {
-//            executionTime = "\(entity.executionTime.timeInterval)s"
-//        }
-//        timeLabel.text = "\(startTime) - \(stopTime) (\(miliseconds))"
         timeLabel.text = "\(entity.executionTime.seconds)s (\(miliseconds))"
     }
     

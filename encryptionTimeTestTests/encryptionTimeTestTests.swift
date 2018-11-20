@@ -21,28 +21,28 @@ class encryptionTimeTestTests: XCTestCase {
         super.tearDown()
     }
     
-    func testPerformanceRsa1024() {
-        self.measure {
-            KeyGenerator().rsa(keyLength: .rsa1024)
-        }
-    }
-    
-    func testPerformanceRsa2048() {
-        self.measure {
-            KeyGenerator().rsa(keyLength: .rsa2048)
-        }
-    }
-    
-    func testPerformanceRsa4096() {
-        self.measure {
-            KeyGenerator().rsa(keyLength: .rsa4096)
-        }
-    }
-    
-    func testPerformanceRsa8192() {
-        self.measure {
-            KeyGenerator().rsa(keyLength: .rsa8192)
-        }
-    }
+//    func testPerformanceRsa1024() {
+//        self.measure {
+//            KeyGenerator().rsa(keyLength: .rsa1024)
+//        }
+//    }
+//    
+//    func testPerformanceRsa2048() {
+//        self.measure {
+//            KeyGenerator().rsa(keyLength: .rsa2048)
+//        }
+//    }
+//    
+//    func testPerformanceRsa4096() {
+//        self.measure {
+//            KeyGenerator().rsa(keyLength: .rsa4096)
+//        }
+//    }
+//    
+//    func testPerformanceRsa8192() {
+//        self.measure {
+//            KeyGenerator().rsa(keyLength: .rsa8192)
+//        }
+//    }
     
 }
