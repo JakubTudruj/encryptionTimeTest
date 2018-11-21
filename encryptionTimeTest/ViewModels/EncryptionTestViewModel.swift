@@ -22,6 +22,8 @@ class EncryptionTestViewModel {
     weak var delegate: EncryptionTestViewModelDelegate?
     
     private let keyGenerator = KeyGenerator()
+    private let encryptor = Encryptor()
+    
     private let semaphore = DispatchSemaphore(value: 1)
     
     func runAllTests() {
@@ -29,55 +31,59 @@ class EncryptionTestViewModel {
         results = [ResultEntity]()
         delegate?.viewModelDidEndClearingResults()
         
-        test(name: "RSA 1024") { [weak self] in
+        test(name: "Generating RSA 1024") { [weak self] in
             try self?.keyGenerator.rsa(keyLength: .rsa1024)
         }
         
-        test(name: "RSA 2048") { [weak self] in
+        test(name: "Encrypting text using RSA 1024") { [weak self] in
+            self?.encryptor.encrypt(data: <#T##Data#>, using: <#T##SecKeyAlgorithm#>, with: <#T##SecKey#>)
+        }
+        
+        test(name: "Generating RSA 2048") { [weak self] in
             try self?.keyGenerator.rsa(keyLength: .rsa2048)
         }
         
-        test(name: "RSA 4096") { [weak self] in
+        test(name: "Generating RSA 4096") { [weak self] in
             try self?.keyGenerator.rsa(keyLength: .rsa4096)
         }
 
-        test(name: "RSA 8192") { [weak self] in
+        test(name: "Generating RSA 8192") { [weak self] in
             try self?.keyGenerator.rsa(keyLength: .rsa8192)
         }
         
-        test(name: "RSA 15360") { [weak self] in
+        test(name: "Generating RSA 15360") { [weak self] in
             try self?.keyGenerator.rsa(keyLength: .rsa15360)
         }
         
-        test(name: "ECC 160") { [weak self] in
+        test(name: "Generating ECC 160") { [weak self] in
             try self?.keyGenerator.ecc(keyLength: .ecc160)
         }
         
-        test(name: "ECC 224") { [weak self] in
+        test(name: "Generating ECC 224") { [weak self] in
             try self?.keyGenerator.ecc(keyLength: .ecc224)
         }
         
-        test(name: "ECC 256") { [weak self] in
+        test(name: "Generating ECC 256") { [weak self] in
             try self?.keyGenerator.ecc(keyLength: .ecc256)
         }
         
-        test(name: "ECC 384") { [weak self] in
+        test(name: "Generating ECC 384") { [weak self] in
             try self?.keyGenerator.ecc(keyLength: .ecc384)
         }
         
-        test(name: "ECC 512") { [weak self] in
+        test(name: "Generating ECC 512") { [weak self] in
             try self?.keyGenerator.ecc(keyLength: .ecc512)
         }
         
-        test(name: "AES 128") { [weak self] in
+        test(name: "Generating AES 128") { [weak self] in
             try self?.keyGenerator.aes(keyLength: .aes128)
         }
         
-        test(name: "AES 192") { [weak self] in
+        test(name: "Generating AES 192") { [weak self] in
             try self?.keyGenerator.aes(keyLength: .aes192)
         }
         
-        test(name: "AES 256") { [weak self] in
+        test(name: "Generating AES 256") { [weak self] in
             try self?.keyGenerator.aes(keyLength: .aes256)
             DispatchQueue.main.async { [weak self] in
                 self?.delegate?.viewModelDidEndAllTest()
