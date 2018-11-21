@@ -168,10 +168,7 @@ class EncryptionTestViewModel {
             self?.generatedAsymmetricKey = try self?.keyGenerator.ecc(keyLength: .ecc160)
         }
         
-        test(name: "Encrypting using ECC 160") { [weak self] in
-            guard let self = self else { return }
-            self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
-        }
+        /*no encrypting test - generating ECC 512 failure*/
         
         // MARK: 224
         test(name: "Generating ECC 224") { [weak self] in

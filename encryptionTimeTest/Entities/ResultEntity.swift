@@ -35,4 +35,16 @@ extension ResultEntity: CustomStringConvertible {
         }
         return text
     }
+
+}
+
+extension ResultEntity: CsvExportable {
+    var csvText: String {
+        let errorText = error?.localizedDescription ?? "-"
+        return "\(name);\(errorText);\(executionTime.miliseconds);"
+    }
+}
+
+protocol CsvExportable {
+    var csvText: String { get }
 }

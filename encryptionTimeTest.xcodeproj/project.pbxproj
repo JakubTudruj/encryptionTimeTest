@@ -12,6 +12,7 @@
 		8C13475021A6031100DE919A /* UIImage+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13474F21A6031100DE919A /* UIImage+Data.swift */; };
 		8C13475221A60C4200DE919A /* EncryptionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13475121A60C4200DE919A /* EncryptionKeys.swift */; };
 		8C13475421A611A500DE919A /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13475321A611A500DE919A /* DataExtension.swift */; };
+		8C13475621A6175800DE919A /* Array+Csv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13475521A6175800DE919A /* Array+Csv.swift */; };
 		8C8EF56921A484870068820D /* ResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56821A484870068820D /* ResultEntity.swift */; };
 		8C8EF56D21A48B130068820D /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */; };
 		8C8EF57021A48B350068820D /* KeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56F21A48B350068820D /* KeyGenerator.swift */; };
@@ -44,6 +45,7 @@
 		8C13474F21A6031100DE919A /* UIImage+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Data.swift"; sourceTree = "<group>"; };
 		8C13475121A60C4200DE919A /* EncryptionKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKeys.swift; sourceTree = "<group>"; };
 		8C13475321A611A500DE919A /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
+		8C13475521A6175800DE919A /* Array+Csv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Csv.swift"; sourceTree = "<group>"; };
 		8C8EF56821A484870068820D /* ResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultEntity.swift; sourceTree = "<group>"; };
 		8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		8C8EF56F21A48B350068820D /* KeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGenerator.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				8C13474D21A602C200DE919A /* String+Data.swift */,
 				8C13474F21A6031100DE919A /* UIImage+Data.swift */,
 				8C13475321A611A500DE919A /* DataExtension.swift */,
+				8C13475521A6175800DE919A /* Array+Csv.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C13475621A6175800DE919A /* Array+Csv.swift in Sources */,
 				8C13475221A60C4200DE919A /* EncryptionKeys.swift in Sources */,
 				8CF3DD8D20E57944005D9F08 /* EncryptionTestViewController.swift in Sources */,
 				8CCEBFD721A4D60600D5DB33 /* ExecutionTime.swift in Sources */,
