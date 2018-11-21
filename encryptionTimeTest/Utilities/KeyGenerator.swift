@@ -7,13 +7,17 @@
 //
 
 import Foundation
+import CommonCrypto
 
 enum AESError: LocalizedError {
     case secRandomCopyBytes(OSStatus)
+    case generatingKeyProblem(Int)
     
     var errorDescription: String? {
         switch self {
         case .secRandomCopyBytes(let code):
+            return "AES generating error. OSStatus: \(code)"
+        case .generatingKeyProblem(let code):
             return "AES generating error. OSStatus: \(code)"
         }
     }
@@ -21,60 +25,56 @@ enum AESError: LocalizedError {
 
 class KeyGenerator {
     
-    enum RSA: Int {
-        case rsa1024 = 1024
-        case rsa2048 = 2048
-        case rsa4096 = 4096
-        case rsa8192 = 8192
-        case rsa15360 = 15360
-    }
-    
-    enum ECC: Int {
-        case ecc160 = 160
-        case ecc224 = 224
-        case ecc256 = 256
-        case ecc384 = 384
-        case ecc512 = 512
-    }
-    
-    enum AES: Int {
-        case aes128 = 128
-        case aes192 = 192
-        case aes256 = 256
-    }
-    
-    func rsa(keyLength: RSA) throws {
+    func rsa(keyLength: RSA) throws -> SecKey {
         let parameters: [CFString : Any] = [
             kSecAttrKeyType : kSecAttrKeyTypeRSA,
             kSecAttrKeySizeInBits : keyLength.rawValue
         ]
-        try key(parameters: parameters)
+        return try key(parameters: parameters)
     }
     
-    func ecc(keyLength: ECC) throws {
+    func ecc(keyLength: ECC) throws -> SecKey {
         let parameters: [CFString : Any] = [
             kSecAttrKeyType : kSecAttrKeyTypeECSECPrimeRandom,
             kSecAttrKeySizeInBits : keyLength.rawValue
         ]
-        try key(parameters: parameters)
+        return try key(parameters: parameters)
     }
     
-    func aes(keyLength: AES) throws {
-        var bytes = [Int8](repeating: 0, count: keyLength.rawValue)
-        let status = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
-        if status == errSecSuccess {
-            print("AES \(keyLength.rawValue):")
-            print(bytes)
-        } else {
-            throw AESError.secRandomCopyBytes(status)
+    func aes(keyLength: AES) throws -> Data {
+        let password = Data.random(length: 8)
+        let salt = Data.random(length: 8)
+        
+        let length = keyLength.rawValue
+        
+        var status = Int32(0)
+        var derivedBytes = [UInt8](repeating: 0, count: length)
+        password.withUnsafeBytes { (passwordBytes: UnsafePointer<Int8>!) in
+            salt.withUnsafeBytes { (saltBytes: UnsafePointer<UInt8>!) in
+                status = CCKeyDerivationPBKDF(CCPBKDFAlgorithm(kCCPBKDF2),                  // algorithm
+                    passwordBytes,                                // password
+                    password.count,                               // passwordLen
+                    saltBytes,                                    // salt
+                    salt.count,                                   // saltLen
+                    CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA1),   // prf
+                    10000,                                        // rounds
+                    &derivedBytes,                                // derivedKey
+                    length)                                       // derivedKeyLen
+            }
         }
+        guard status == 0 else {
+            throw AESError.generatingKeyProblem(Int(status))
+        }
+        return Data(bytes: UnsafePointer<UInt8>(derivedBytes), count: length)
     }
     
-    private func key(parameters: [CFString : Any]) throws {
+    private func key(parameters: [CFString : Any]) throws -> SecKey {
         var error: Unmanaged<CFError>?
-        SecKeyCreateRandomKey(parameters as CFDictionary, &error)
+        let key = SecKeyCreateRandomKey(parameters as CFDictionary, &error)
         if let e = error {
             throw e.takeRetainedValue()
+        } else {
+            return key!
         }
     }
     

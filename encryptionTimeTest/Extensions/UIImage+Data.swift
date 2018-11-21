@@ -10,8 +10,8 @@ import UIKit
 
 extension UIImage {
     
-    var data: Data {
-        return self.pngData()!
+    var data: CFData {
+        return self.pngData()! as CFData
     }
     
 }

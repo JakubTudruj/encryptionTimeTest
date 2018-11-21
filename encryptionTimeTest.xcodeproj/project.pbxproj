@@ -10,6 +10,8 @@
 		8C13474C21A6000500DE919A /* TestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13474B21A6000500DE919A /* TestDataProvider.swift */; };
 		8C13474E21A602C200DE919A /* String+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13474D21A602C200DE919A /* String+Data.swift */; };
 		8C13475021A6031100DE919A /* UIImage+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13474F21A6031100DE919A /* UIImage+Data.swift */; };
+		8C13475221A60C4200DE919A /* EncryptionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13475121A60C4200DE919A /* EncryptionKeys.swift */; };
+		8C13475421A611A500DE919A /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13475321A611A500DE919A /* DataExtension.swift */; };
 		8C8EF56921A484870068820D /* ResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56821A484870068820D /* ResultEntity.swift */; };
 		8C8EF56D21A48B130068820D /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */; };
 		8C8EF57021A48B350068820D /* KeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56F21A48B350068820D /* KeyGenerator.swift */; };
@@ -17,7 +19,7 @@
 		8C8EF57721A4909E0068820D /* EncryptionTestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF57621A4909E0068820D /* EncryptionTestTableViewCell.swift */; };
 		8CCEBFD521A4C7B500D5DB33 /* AcceptButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCEBFD421A4C7B500D5DB33 /* AcceptButton.swift */; };
 		8CCEBFD721A4D60600D5DB33 /* ExecutionTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCEBFD621A4D60600D5DB33 /* ExecutionTime.swift */; };
-		8CCEBFD921A4D74A00D5DB33 /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCEBFD821A4D74A00D5DB33 /* Encryptor.swift */; };
+		8CCEBFD921A4D74A00D5DB33 /* AsymmetricEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCEBFD821A4D74A00D5DB33 /* AsymmetricEncryptor.swift */; };
 		8CF3DD8B20E57944005D9F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */; };
 		8CF3DD8D20E57944005D9F08 /* EncryptionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8C20E57944005D9F08 /* EncryptionTestViewController.swift */; };
 		8CF3DD9020E57944005D9F08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8E20E57944005D9F08 /* Main.storyboard */; };
@@ -40,6 +42,8 @@
 		8C13474B21A6000500DE919A /* TestDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataProvider.swift; sourceTree = "<group>"; };
 		8C13474D21A602C200DE919A /* String+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Data.swift"; sourceTree = "<group>"; };
 		8C13474F21A6031100DE919A /* UIImage+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Data.swift"; sourceTree = "<group>"; };
+		8C13475121A60C4200DE919A /* EncryptionKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKeys.swift; sourceTree = "<group>"; };
+		8C13475321A611A500DE919A /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		8C8EF56821A484870068820D /* ResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultEntity.swift; sourceTree = "<group>"; };
 		8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		8C8EF56F21A48B350068820D /* KeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGenerator.swift; sourceTree = "<group>"; };
@@ -47,7 +51,7 @@
 		8C8EF57621A4909E0068820D /* EncryptionTestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionTestTableViewCell.swift; sourceTree = "<group>"; };
 		8CCEBFD421A4C7B500D5DB33 /* AcceptButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptButton.swift; sourceTree = "<group>"; };
 		8CCEBFD621A4D60600D5DB33 /* ExecutionTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutionTime.swift; sourceTree = "<group>"; };
-		8CCEBFD821A4D74A00D5DB33 /* Encryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptor.swift; sourceTree = "<group>"; };
+		8CCEBFD821A4D74A00D5DB33 /* AsymmetricEncryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsymmetricEncryptor.swift; sourceTree = "<group>"; };
 		8CF3DD8720E57944005D9F08 /* encryptionTimeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = encryptionTimeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CF3DD8C20E57944005D9F08 /* EncryptionTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionTestViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +87,7 @@
 			children = (
 				8C8EF56821A484870068820D /* ResultEntity.swift */,
 				8CCEBFD621A4D60600D5DB33 /* ExecutionTime.swift */,
+				8C13475121A60C4200DE919A /* EncryptionKeys.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -93,6 +98,7 @@
 				8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */,
 				8C13474D21A602C200DE919A /* String+Data.swift */,
 				8C13474F21A6031100DE919A /* UIImage+Data.swift */,
+				8C13475321A611A500DE919A /* DataExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -101,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				8C8EF56F21A48B350068820D /* KeyGenerator.swift */,
-				8CCEBFD821A4D74A00D5DB33 /* Encryptor.swift */,
+				8CCEBFD821A4D74A00D5DB33 /* AsymmetricEncryptor.swift */,
 				8C13474B21A6000500DE919A /* TestDataProvider.swift */,
 			);
 			path = Utilities;
@@ -286,9 +292,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C13475221A60C4200DE919A /* EncryptionKeys.swift in Sources */,
 				8CF3DD8D20E57944005D9F08 /* EncryptionTestViewController.swift in Sources */,
 				8CCEBFD721A4D60600D5DB33 /* ExecutionTime.swift in Sources */,
-				8CCEBFD921A4D74A00D5DB33 /* Encryptor.swift in Sources */,
+				8CCEBFD921A4D74A00D5DB33 /* AsymmetricEncryptor.swift in Sources */,
+				8C13475421A611A500DE919A /* DataExtension.swift in Sources */,
 				8C13474C21A6000500DE919A /* TestDataProvider.swift in Sources */,
 				8C13474E21A602C200DE919A /* String+Data.swift in Sources */,
 				8C13475021A6031100DE919A /* UIImage+Data.swift in Sources */,
