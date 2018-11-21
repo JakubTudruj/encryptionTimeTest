@@ -14,6 +14,7 @@
 		8C8EF57721A4909E0068820D /* EncryptionTestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF57621A4909E0068820D /* EncryptionTestTableViewCell.swift */; };
 		8CCEBFD521A4C7B500D5DB33 /* AcceptButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCEBFD421A4C7B500D5DB33 /* AcceptButton.swift */; };
 		8CCEBFD721A4D60600D5DB33 /* ExecutionTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCEBFD621A4D60600D5DB33 /* ExecutionTime.swift */; };
+		8CCEBFD921A4D74A00D5DB33 /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCEBFD821A4D74A00D5DB33 /* Encryptor.swift */; };
 		8CF3DD8B20E57944005D9F08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */; };
 		8CF3DD8D20E57944005D9F08 /* EncryptionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8C20E57944005D9F08 /* EncryptionTestViewController.swift */; };
 		8CF3DD9020E57944005D9F08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF3DD8E20E57944005D9F08 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		8C8EF57621A4909E0068820D /* EncryptionTestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionTestTableViewCell.swift; sourceTree = "<group>"; };
 		8CCEBFD421A4C7B500D5DB33 /* AcceptButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptButton.swift; sourceTree = "<group>"; };
 		8CCEBFD621A4D60600D5DB33 /* ExecutionTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutionTime.swift; sourceTree = "<group>"; };
+		8CCEBFD821A4D74A00D5DB33 /* Encryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptor.swift; sourceTree = "<group>"; };
 		8CF3DD8720E57944005D9F08 /* encryptionTimeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = encryptionTimeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF3DD8A20E57944005D9F08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CF3DD8C20E57944005D9F08 /* EncryptionTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionTestViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				8C8EF56F21A48B350068820D /* KeyGenerator.swift */,
+				8CCEBFD821A4D74A00D5DB33 /* Encryptor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			files = (
 				8CF3DD8D20E57944005D9F08 /* EncryptionTestViewController.swift in Sources */,
 				8CCEBFD721A4D60600D5DB33 /* ExecutionTime.swift in Sources */,
+				8CCEBFD921A4D74A00D5DB33 /* Encryptor.swift in Sources */,
 				8CCEBFD521A4C7B500D5DB33 /* AcceptButton.swift in Sources */,
 				8C8EF57421A48BC40068820D /* EncryptionTestViewModel.swift in Sources */,
 				8C8EF57721A4909E0068820D /* EncryptionTestTableViewCell.swift in Sources */,
