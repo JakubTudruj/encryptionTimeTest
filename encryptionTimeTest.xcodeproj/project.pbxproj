@@ -13,6 +13,7 @@
 		8C13475221A60C4200DE919A /* EncryptionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13475121A60C4200DE919A /* EncryptionKeys.swift */; };
 		8C13475421A611A500DE919A /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13475321A611A500DE919A /* DataExtension.swift */; };
 		8C13475621A6175800DE919A /* Array+Csv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13475521A6175800DE919A /* Array+Csv.swift */; };
+		8C13475821A6223300DE919A /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13475721A6223300DE919A /* ShareButton.swift */; };
 		8C8EF56921A484870068820D /* ResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56821A484870068820D /* ResultEntity.swift */; };
 		8C8EF56D21A48B130068820D /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */; };
 		8C8EF57021A48B350068820D /* KeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8EF56F21A48B350068820D /* KeyGenerator.swift */; };
@@ -46,6 +47,7 @@
 		8C13475121A60C4200DE919A /* EncryptionKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKeys.swift; sourceTree = "<group>"; };
 		8C13475321A611A500DE919A /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		8C13475521A6175800DE919A /* Array+Csv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Csv.swift"; sourceTree = "<group>"; };
+		8C13475721A6223300DE919A /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
 		8C8EF56821A484870068820D /* ResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultEntity.swift; sourceTree = "<group>"; };
 		8C8EF56C21A48B130068820D /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		8C8EF56F21A48B350068820D /* KeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGenerator.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				8CCEBFD421A4C7B500D5DB33 /* AcceptButton.swift */,
+				8C13475721A6223300DE919A /* ShareButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				8C13475021A6031100DE919A /* UIImage+Data.swift in Sources */,
 				8CCEBFD521A4C7B500D5DB33 /* AcceptButton.swift in Sources */,
 				8C8EF57421A48BC40068820D /* EncryptionTestViewModel.swift in Sources */,
+				8C13475821A6223300DE919A /* ShareButton.swift in Sources */,
 				8C8EF57721A4909E0068820D /* EncryptionTestTableViewCell.swift in Sources */,
 				8C8EF56921A484870068820D /* ResultEntity.swift in Sources */,
 				8C8EF57021A48B350068820D /* KeyGenerator.swift in Sources */,

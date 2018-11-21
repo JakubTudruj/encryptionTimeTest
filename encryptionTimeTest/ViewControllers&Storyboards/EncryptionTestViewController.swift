@@ -13,6 +13,7 @@ class EncryptionTestViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var startTestButton: UIButton!
+    @IBOutlet private weak var shareButton: UIButton!
     
     private let viewModel = EncryptionTestViewModel()
     
@@ -21,6 +22,7 @@ class EncryptionTestViewController: UIViewController {
         setupTableView()
         setupActivityIndicator()
         viewModel.delegate = self
+        shareButton.isEnabled = false
     }
 
     private func setupTableView() {
@@ -37,9 +39,31 @@ class EncryptionTestViewController: UIViewController {
     @IBAction private func startTestButtonTapped(_ sender: Any) {
         activityIndicator.startAnimating()
         startTestButton.isEnabled = false
+        shareButton.isEnabled = false
         viewModel.runAllTests()
     }
     
+    @IBAction func shareButtonClicked(_ sender: Any) {
+
+        let sortedResults = viewModel.results.sorted { $0.name < $1.name }
+        let textToShare = sortedResults.csvText
+        let activityViewController = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
+        
+        // Anything you want to exclude
+        activityViewController.excludedActivityTypes = [
+            .postToWeibo,
+            .print,
+            .assignToContact,
+            .saveToCameraRoll,
+            .addToReadingList,
+            .postToFlickr,
+            .postToVimeo,
+            .postToTencentWeibo
+        ]
+        
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+
 }
 
 extension EncryptionTestViewController: UITableViewDataSource {
@@ -64,6 +88,7 @@ extension EncryptionTestViewController: EncryptionTestViewModelDelegate {
         activityIndicator.stopAnimating()
         startTestButton.isEnabled = true
         tableView.layoutSubviews()
+        shareButton.isEnabled = true
     }
     
     func viewModelDidEndClearingResults() {

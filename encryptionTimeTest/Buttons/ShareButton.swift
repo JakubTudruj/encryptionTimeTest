@@ -1,15 +1,15 @@
 //
-//  AcceptButton.swift
+//  ShareButton.swift
 //  encryptionTimeTest
 //
-//  Created by Jakub Tudruj on 20/11/2018.
+//  Created by Jakub Tudruj on 22/11/2018.
 //  Copyright © 2018 Jakub Tudruj. All rights reserved.
 //
 
 import UIKit
 
-class AcceptButton: UIButton {
-
+class ShareButton: UIButton {
+    
     override var isEnabled: Bool {
         didSet {
             alpha = isEnabled ? 1 : 0.5
@@ -28,7 +28,7 @@ class AcceptButton: UIButton {
     
     private func setupButton() {
         setTitleColor(UIColor.white, for: .normal)
-        backgroundColor = UIColor.red
+        backgroundColor = UIColor.purple
     }
-
+    
 }
