@@ -146,14 +146,14 @@ class EncryptionTestViewModel {
         }
 
         // MARK: 8192
-        test(name: "Generating RSA 8192") { [weak self] in
-            self?.generatedAsymmetricKey = try self?.keyGenerator.rsa(keyLength: .rsa8192)
-        }
-        
-        test(name: "Encrypting using RSA 8192") { [weak self] in
-            guard let self = self else { return }
-            self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
-        }
+//        test(name: "Generating RSA 8192") { [weak self] in
+//            self?.generatedAsymmetricKey = try self?.keyGenerator.rsa(keyLength: .rsa8192)
+//        }
+//        
+//        test(name: "Encrypting using RSA 8192") { [weak self] in
+//            guard let self = self else { return }
+//            self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
+//        }
         
         // MARK: 15360
         test(name: "Generating RSA 15360") { [weak self] in
@@ -190,6 +190,13 @@ class EncryptionTestViewModel {
             self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
         }
         
+        // MARK: 512
+        test(name: "Generating ECC 512") { [weak self] in
+            self?.generatedAsymmetricKey = try self?.keyGenerator.ecc(keyLength: .ecc512)
+        }
+        
+        /*no encrypting test - generating ECC 512 failure*/
+        
         // MARK: 384
         test(name: "Generating ECC 384") { [weak self] in
             self?.generatedAsymmetricKey = try self?.keyGenerator.ecc(keyLength: .ecc384)
@@ -198,17 +205,12 @@ class EncryptionTestViewModel {
         test(name: "Encrypting using ECC 384") { [weak self] in
             guard let self = self else { return }
             self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
-        }
-        
-        // MARK: 512
-        test(name: "Generating ECC 512") { [weak self] in
-            self?.generatedAsymmetricKey = try self?.keyGenerator.ecc(keyLength: .ecc512)
             DispatchQueue.main.async { [weak self] in
-                self?.delegate?.viewModelDidEndAllTest()
+                guard let self = self else { return }
+                self.delegate?.viewModelDidEndAllTest()
+                print(self.results.csvText)
             }
         }
-        
-        /*no encrypting test - generating ECC 512 failure*/
         
     }
     
