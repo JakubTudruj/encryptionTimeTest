@@ -32,8 +32,8 @@ struct SymmetricEncryptor {
     
     
     // MARK: - Initialzier
-    init?(key: Data, iv: Data) {
-        guard key.count == kCCKeySizeAES128 || key.count == kCCKeySizeAES256 else {
+    init?(key: Data, iv: Data = Data.random(length: kCCBlockSizeAES128)) {
+        guard key.count == kCCKeySizeAES128 || key.count == kCCKeySizeAES192 || key.count == kCCKeySizeAES256 else {
             debugPrint("Error: Failed to set a key.")
             return nil
         }

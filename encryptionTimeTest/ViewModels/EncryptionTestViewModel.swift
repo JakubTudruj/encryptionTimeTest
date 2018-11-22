@@ -47,22 +47,22 @@ class EncryptionTestViewModel {
             
             test(name: "AES 128: Encrypting small text") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(string: self.dataProvider.text)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(string: self.dataProvider.text)
             }
             
             test(name: "AES 128: Encrypting long text") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(string: self.dataProvider.longText)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(string: self.dataProvider.longText)
             }
             
             test(name: "AES 128: Encrypting small image") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(image: self.dataProvider.smallImage)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(image: self.dataProvider.smallImage)
             }
             
             test(name: "AES 128: Encrypting large image") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(image: self.dataProvider.largeImage)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(image: self.dataProvider.largeImage)
             }
             
             // MARK: 192
@@ -72,22 +72,22 @@ class EncryptionTestViewModel {
             
             test(name: "AES 192: Encrypting small text") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(string: self.dataProvider.text)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(string: self.dataProvider.text)
             }
             
             test(name: "AES 192: Encrypting long text") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(string: self.dataProvider.longText)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(string: self.dataProvider.longText)
             }
             
             test(name: "AES 192: Encrypting small image") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(image: self.dataProvider.smallImage)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(image: self.dataProvider.smallImage)
             }
             
             test(name: "AES 192: Encrypting large image") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(image: self.dataProvider.largeImage)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(image: self.dataProvider.largeImage)
             }
             
             // MARK: 256
@@ -97,22 +97,22 @@ class EncryptionTestViewModel {
             
             test(name: "AES 256: Encrypting small text") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(string: self.dataProvider.text)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(string: self.dataProvider.text)
             }
             
             test(name: "AES 256: Encrypting long text") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(string: self.dataProvider.longText)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(string: self.dataProvider.longText)
             }
             
             test(name: "AES 256: Encrypting small image") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(image: self.dataProvider.smallImage)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(image: self.dataProvider.smallImage)
             }
             
             test(name: "AES 256: Encrypting large image") { [weak self] in
                 guard let self = self else { return }
-                SymmetricEncryptor(key: self.generatedSymmetricKey, iv: Data.random(length: 8))?.encrypt(image: self.dataProvider.largeImage)
+                SymmetricEncryptor(key: self.generatedSymmetricKey)?.encrypt(image: self.dataProvider.largeImage)
             }
             
             // generating aes 128 for asymmetric tests below

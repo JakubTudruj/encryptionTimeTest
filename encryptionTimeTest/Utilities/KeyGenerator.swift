@@ -42,8 +42,8 @@ class KeyGenerator {
     }
     
     func aes(keyLength: AES) throws -> Data {
-        let password = Data.random(length: 8)
-        let salt = Data.random(length: 8)
+        let password = Data.random(length: kCCBlockSizeAES128)
+        let salt = Data.random(length: kCCBlockSizeAES128)
         
         let length = keyLength.keySize
         
