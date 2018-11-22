@@ -6,7 +6,7 @@
 //  Copyright © 2018 Jakub Tudruj. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct ResultEntity {
     let name: String
@@ -17,6 +17,10 @@ struct ResultEntity {
     var executionTime: ExecutionTime {
         let timeInterval = stopTime.timeIntervalSince(startTime)
         return ExecutionTime(timeInterval: timeInterval)
+    }
+
+    var deviceName: String {
+        return UIDevice().deviceName
     }
 }
 
@@ -41,7 +45,7 @@ extension ResultEntity: CustomStringConvertible {
 extension ResultEntity: CsvExportable {
     var csvText: String {
         let errorText = error?.localizedDescription ?? "-"
-        return "\(name);\(errorText);\(executionTime.miliseconds);"
+        return "\(deviceName);\(name);\(errorText);\(executionTime.miliseconds);"
     }
 }
 

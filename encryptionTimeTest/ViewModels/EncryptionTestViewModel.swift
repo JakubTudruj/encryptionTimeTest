@@ -140,24 +140,24 @@ class EncryptionTestViewModel {
             }
             
             // MARK: 4096
-//            test(name: "Generating RSA 4096") { [weak self] in
-//                self?.generatedAsymmetricKey = try self?.keyGenerator.rsa(keyLength: .rsa4096)
-//            }
-//
-//            test(name: "Encrypting using RSA 4096") { [weak self] in
-//                guard let self = self else { return }
-//                self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
-//            }
+            test(name: "Generating RSA 4096") { [weak self] in
+                self?.generatedAsymmetricKey = try self?.keyGenerator.rsa(keyLength: .rsa4096)
+            }
+            
+            test(name: "Encrypting using RSA 4096") { [weak self] in
+                guard let self = self else { return }
+                self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
+            }
             
             // MARK: 8192
-            //        test(name: "Generating RSA 8192") { [weak self] in
-            //            self?.generatedAsymmetricKey = try self?.keyGenerator.rsa(keyLength: .rsa8192)
-            //        }
-            //
-            //        test(name: "Encrypting using RSA 8192") { [weak self] in
-            //            guard let self = self else { return }
-            //            self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
-            //        }
+            test(name: "Generating RSA 8192") { [weak self] in
+                self?.generatedAsymmetricKey = try self?.keyGenerator.rsa(keyLength: .rsa8192)
+            }
+            
+            test(name: "Encrypting using RSA 8192") { [weak self] in
+                guard let self = self else { return }
+                self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
+            }
             
             // MARK: 15360
             test(name: "Generating RSA 15360") { [weak self] in
