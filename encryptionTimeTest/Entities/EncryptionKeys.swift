@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CommonCrypto
 
 enum RSA: Int {
     case rsa1024 = 1024
@@ -28,4 +29,15 @@ enum AES: Int {
     case aes128 = 128
     case aes192 = 192
     case aes256 = 256
+    
+    var keySize: Int {
+        switch self {
+        case .aes128:
+            return kCCKeySizeAES128
+        case .aes192:
+            return kCCKeySizeAES192
+        case .aes256:
+            return kCCKeySizeAES256
+        }
+    }
 }

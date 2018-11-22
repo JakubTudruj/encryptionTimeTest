@@ -45,7 +45,7 @@ class KeyGenerator {
         let password = Data.random(length: 8)
         let salt = Data.random(length: 8)
         
-        let length = keyLength.rawValue
+        let length = keyLength.keySize
         
         var status = Int32(0)
         var derivedBytes = [UInt8](repeating: 0, count: length)

@@ -139,7 +139,7 @@ class EncryptionTestViewModel {
                 self.asymmetricEncryptor.encrypt(data: self.generatedSymmetricKey as CFData, using: .rsaEncryptionRaw, with: self.generatedAsymmetricKey)
             }
             
-            // MARK: 4096
+            //  MARK: 4096
             test(name: "Generating RSA 4096") { [weak self] in
                 self?.generatedAsymmetricKey = try self?.keyGenerator.rsa(keyLength: .rsa4096)
             }
